@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Just a Question</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background-color: #f0f0f0; /* plain light gray */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card {
+      background: #ffffff; /* plain white */
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      z-index: 1;
+      border: 3px solid #333; /* subtle border */
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #333; /* dark gray */
+      margin-bottom: 30px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      padding: 15px 40px;
+      transition: transform 0.2s;
+    }
+
+    #yes {
+      background: #4CAF50; /* green */
+      color: white;
+      font-size: 1.6rem;
+    }
+
+    #yes:hover {
+      transform: scale(1.1);
+      background: #45a049;
+    }
+
+    #no {
+      position: fixed;
+      background: #f44336; /* red */
+      color: white;
+      left: 50%;
+      top: 65%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    #gif {
+      display: none;
+      position: fixed;
+      max-width: 90%;
+      max-height: 70%;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+
+    #yay-text {
+      display: none;
+      position: fixed;
+      top: 75%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.8rem;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+      z-index: 3;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* Credit text */
+    #credit {
+      position: fixed;
+      bottom: 10px;
+      right: 15px;
+      font-size: 0.9rem;
+      color: rgba(0,0,0,0.6);
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1>Are you gay?</h1>
+    <button id="yes">Yes ✅</button>
+  </div>
+
+  <button id="no">No ❌</button>
+
+  <!-- Center GIF -->
+  <img id="gif" src="https://media.tenor.com/q6AMEah-bPAAAAAj/cat.gif" alt="GIF">
+
+  <!-- Text below GIF -->
+  <div id="yay-text">It's ok bro, we accept you 🙂</div>
+
+  <!-- Credit -->
+  <div id="credit">jude Anthony</div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const gif = document.getElementById("gif");
+    const card = document.getElementById("card");
+    const yayText = document.getElementById("yay-text");
+
+    // NO button teleports when clicked
+    noBtn.addEventListener("click", () => {
+      const margin = 20;
+      const maxX = window.innerWidth - noBtn.offsetWidth - margin;
+      const maxY = window.innerHeight - noBtn.offsetHeight - margin;
+
+      const x = Math.random() * maxX + margin;
+      const y = Math.random() * maxY + margin;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // YES button behavior
+    yesBtn.addEventListener("click", () => {
+      card.style.display = "none";
+      noBtn.style.display = "none";
+
+      gif.style.display = "block";
+      yayText.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
